@@ -64,11 +64,11 @@ Adding a new tool meant editing 4 files in 4 formats. Renaming a parameter meant
 │  └────────────────────────────────────────────────────┘    │
 └──────────────────────────────────────────────────────────┘
          │              │               │             │
-    ┌────▼────┐  ┌──────▼─────┐  ┌─────▼────┐  ┌────▼────┐
-    │ Agentic │  │  Public    │  │  Agent   │  │Resonant │
-    │  Chat   │  │   Chat    │  │ Executor │  │   IDE   │
-    │(~100 t) │  │ (14 t)    │  │ (~25 t)  │  │(~61 t)  │
-    └─────────┘  └───────────┘  └──────────┘  └─────────┘
+    ┌────────────┐  ┌───────────┐  ┌──────────┐  ┌─────────┐
+    │ rg_agentic│  │  Agent    │  │  Agent   │  │Resonant │
+    │   _chat   │  │  Engine   │  │ Executor │  │   IDE   │
+    │(~112 hdl) │  │ (service) │  │ (~25 t)  │  │(~61 t)  │
+    └────────────┘  └───────────┘  └──────────┘  └─────────┘
 ```
 
 ---
@@ -298,15 +298,20 @@ pip install -e .
 
 This module is deployed across the entire Resonant Genesis backend:
 
-| Service | Import | Purpose |
-|---------|--------|---------|
-| **Chat Service** (agentic) | `from rg_tool_registry.builtin_tools import build_registry` | 100+ tools for registered users |
-| **Chat Service** (public) | `from rg_tool_registry.builder import build_guest_registry` | 14 tools for guests |
-| **Agent Engine** | `from rg_tool_registry.builtin_tools import build_registry` | Tool loading for autonomous agents |
-| **Agent Executor** | `from rg_tool_registry.observability import ToolObserver` | Per-tool metrics tracking |
-| **IDE Completions** | `from rg_tool_registry.builder import build_ide_registry` | IDE tool definitions |
+| Service | Docker Container | Import | Purpose |
+|---------|-----------------|--------|--------|
+| **Registered Users Agentic Chat** | `rg_agentic_chat` | `from rg_tool_registry import ...` | 112 handler tools for auth users |
+| **Agent Engine** | `agent_engine_service` | `from rg_tool_registry.builtin_tools import build_registry` | Tool loading for autonomous agents |
+| **Agent Executor** | `agent_engine_service` | `from rg_tool_registry.observability import ToolObserver` | Per-tool metrics tracking |
+| **IDE Completions** | `chat_service` | `from rg_tool_registry.builder import build_ide_registry` | IDE tool definitions |
 
-Docker volume mount: `/home/deploy/rg_tool_registry:/app/rg_tool_registry:ro` across `chat_service` and `agent_engine_service` containers.
+Deployed on production via Docker **read-only volume mount** — shared across 2 containers:
+```
+- /home/deploy/RG_Unified_Tool_Registry/rg_tool_registry:/app/rg_tool_registry:ro
+```
+All containers use `PYTHONPATH=/app` so imports work as `from rg_tool_registry import ...`.
+
+> **Note**: `rg_public_guest_chat` does NOT use this module — its 14 guest tools are defined locally in `app/tools.py`.
 
 ---
 

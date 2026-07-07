@@ -4,12 +4,12 @@
 
 ### One canonical tool format for every system · Real-time observability for every call
 
-**Built entirely by AI, orchestrated by [Louie Nemesh](https://dev-swat.com)**
+**Built entirely by AI, orchestrated by [Louie Nemesh](https://resonant.dev-swat.com)**
 
 [![License: RG Source Available](https://img.shields.io/badge/License-RG%20Source%20Available-blue.svg)](LICENSE.txt)
 [![Python 3.10+](https://img.shields.io/badge/Python-3.10+-3776AB.svg)](https://python.org)
 [![Tools](https://img.shields.io/badge/Tools-130+-green.svg)](src/rg_tool_registry/builtin_tools.py)
-[![Platform](https://img.shields.io/badge/Platform-dev--swat.com-purple.svg)](https://dev-swat.com)
+[![Platform](https://img.shields.io/badge/Platform-dev--swat.com-purple.svg)](https://resonant.dev-swat.com)
 
 </div>
 
@@ -328,9 +328,9 @@ Copyright (c) 2025-2026 Resonant Genesis / DevSwat. Founded and built by Louie N
 Licensed under the [Resonant Genesis Source Available License](LICENSE.txt).
 
 - **View & study**: Free for everyone
-- **Download & use**: Free with [platform registration](https://dev-swat.com/signup)
+- **Download & use**: Free with [platform registration](https://resonant.dev-swat.com/signup)
 - **Contribute**: Pull requests welcome
-- **Commercial use**: [Contact us](https://dev-swat.com/contact)
+- **Commercial use**: [Contact us](https://resonant.dev-swat.com/contact)
 
 ---
 
